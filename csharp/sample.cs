@@ -14,14 +14,16 @@ namespace Test
             hosts[1] = new Host("localhost1", 3001);
             hosts[2] = new Host("localhost2", 3002);
 
-            // Creating policy and configure username and password
+            // Create policy and configure username and password
             ClientPolicy policy = new ClientPolicy();
             policy.user = "aerospike_user";
             policy.password = "aerospike_pass";
             policy.failIfNotConnected = true;
 
+            // Connect to Aerospike cluster
             AerospikeClient client = new AerospikeClient(policy, hosts);
 
+            // Close connection
             client.Close();
         }
     }
