@@ -5,19 +5,19 @@ import com.aerospike.client.policy.AuthMode;
 
 Host[] hosts = new Host[] {
     new Host(
-        "<IP address>", 
-        "<TLS name>", 
-        <Port>
+        "localhost0", 
+        "aerospike_tls", 
+        port1
     ),
     new Host(
-        "<IP address>", 
-        "<TLS name>", 
-        <Port>
+        "localhost1", 
+        "aerospike_tls",
+        3001
     ),
     new Host(
-        "<IP address>", 
-        "<TLS name>", 
-        <Port>
+        "localhost2",
+        "aerospike_tls",
+        3002
     ),
 };
 
