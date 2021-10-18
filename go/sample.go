@@ -37,7 +37,7 @@ func main() {
 	}
 
 	// Configure TLS
-	// format <IP>:<PORT>:<TLS>,<IP>:<PORT>:<TLS>,<IP>:<PORT>:<TLS>
+	// format IP:PORT:TLS,IP:PORT:TLS,IP:PORT:TLS
 	caFile := "/folder/here/aerospike.ca-v4.crt"
 	serverPool := x509.NewCertPool()
 	caCert, err := ioutil.ReadFile(caFile)

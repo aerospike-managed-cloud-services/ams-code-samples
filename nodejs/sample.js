@@ -4,11 +4,11 @@ const Aerospike = require('aerospike')
 const path = require('path')
 
 // Configure CA file
-// format: <config>, <cert_file>
+// format: config,cert_file
 const caFile = path.join("/folder/here/", "aerospike.ca-v4.crt")
 
 // Configure seed nodes
-// format <IP>:<PORT>,<IP>:<PORT>,<IP>:<PORT>
+// format IP:PORT,IP:PORT,IP:PORT
 let host = "localhost:3000,localhost:3001,localhost:3002";
 host = host.split(",").map(host => {
     let item = host.split(":");
