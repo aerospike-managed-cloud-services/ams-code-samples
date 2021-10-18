@@ -1,32 +1,47 @@
+'use strict';
+
 const Aerospike = require('aerospike')
 const path = require('path')
 
-// Creating connection
-const caFolder = '/Users/jignacio/Documents/Projects/acms-console/deploy/backend/';
-const caFile = 'cafile.pem';
+// Set CA file
+// format: <config>, <cert_file>
+const caFile = path.join("/folder/here/", "aerospike.ca-v4.crt")
 
+// Set seed nodes
+// format <IP>:<PORT>,<IP>:<PORT>,<IP>:<PORT>
+let host = "localhost:3000,localhost:3001,localhost:3002";
+host = host.split(",").map(host => {
+    let item = host.split(":");
+    return {
+        "addr": item[0],
+        "port": parseInt(item[1])
+    }
+});
+
+// Set username and password
+const user = "aerospike_user";
+const pass = "aerospike_pass"
+
+// Starting connection
 const client = Aerospike.client({
-    username: "",
-    password: "",
-    hosts: [
-        { addr: "172.17.0.2", port: 6000 },
-        { addr: "172.17.0.2", port: 6001 },
-        { addr: "172.17.0.2", port: 6002 }
-    ],
+    username: user,
+    password: pass,
+    hosts: host,
     tls: {
         enable: true,
-        cafile: path.join(caFolder, caFile),
+        cafile: caFile,
     },
     log: {
         level: Aerospike.log.info
     },
     connTimeoutMs: 1000
 });
+
 client.connect(function (error) {
     if (error) throw error;
 });
 
-// CODE HERE
+// **** CODE HERE **** //
 
 // Closing connection
 client.close();
