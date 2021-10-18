@@ -1,7 +1,11 @@
 const Aerospike = require('aerospike')
+const path = require('path')
 
 // Creating connection
-let client = Aerospike.client({
+const caFolder = '/Users/jignacio/Documents/Projects/acms-console/deploy/backend/';
+const caFile = 'cafile.pem';
+
+const client = Aerospike.client({
     username: "",
     password: "",
     hosts: [
@@ -9,21 +13,20 @@ let client = Aerospike.client({
         { addr: "172.17.0.2", port: 6001 },
         { addr: "172.17.0.2", port: 6002 }
     ],
+    tls: {
+        enable: true,
+        cafile: path.join(caFolder, caFile),
+    },
     log: {
         level: Aerospike.log.info
-    }
+    },
+    connTimeoutMs: 1000
 });
-
 client.connect(function (error) {
     if (error) throw error;
 });
 
-// Read records
-let key = new Aerospike.Key('test', 'demo', 'key1')
-client.get(key, function (error, record) {
-    if (error) throw error;
-    console.log('OK - ', record);
-})
+// CODE HERE
 
 // Closing connection
 client.close();
