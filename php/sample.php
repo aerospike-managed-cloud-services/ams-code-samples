@@ -1,5 +1,3 @@
-<?php
-
 // Configure seed nodes
 // format IP:PORT,IP:PORT,IP:PORT
 $aerospike_hosts = "localhost:3000,localhost:3001,localhost:3002";
