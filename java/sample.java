@@ -25,7 +25,7 @@ ClientPolicy policy = new ClientPolicy();
 policy.tlsPolicy = new TlsPolicy();
 
 policy.authMode = AuthMode.INTERNAL;
-policy.user = "YOUR AEROSPIKE USER";
-policy.password = "YOUR AEROSPIKE PASSWORD";
+policy.user = "aerospike_user";
+policy.password = "aerospike_pass";
 
 AerospikeClient client = new AerospikeClient(policy, hosts);
