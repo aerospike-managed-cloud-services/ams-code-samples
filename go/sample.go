@@ -24,7 +24,7 @@ func main() {
 	asl.Logger.SetLevel(asl.DEBUG)
 
 	// Configure seed nodes
-	nodes := "localhost:3000:aerospike_tls,localhost:3000:aerospike_tls,localhost:3000:aerospike_tls"
+	nodes := "localhost:3000:aerospike_tls,localhost:3001:aerospike_tls,localhost:3002:aerospike_tls"
 	var hosts []*as.Host
 	seedHosts := strings.Split(nodes, ",")
 
