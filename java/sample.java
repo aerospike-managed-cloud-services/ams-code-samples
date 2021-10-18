@@ -7,7 +7,7 @@ Host[] hosts = new Host[] {
     new Host(
         "localhost0", 
         "aerospike_tls", 
-        port1
+        3000
     ),
     new Host(
         "localhost1", 
