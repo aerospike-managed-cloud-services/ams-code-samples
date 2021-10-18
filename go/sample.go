@@ -5,7 +5,6 @@ import (
 	"crypto/x509"
 	"fmt"
 	"io/ioutil"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -24,9 +23,10 @@ func main() {
 	// Enable verbose DEBUG level logging
 	asl.Logger.SetLevel(asl.DEBUG)
 
-	// Parse seed hosts from format <IP>:<PORT>:<TLS_NAME>,...
+	// Configure seed nodes
+	nodes := "localhost:3000:aerospike_tls,localhost:3000:aerospike_tls,localhost:3000:aerospike_tls"
 	var hosts []*as.Host
-	seedHosts := strings.Split(os.Getenv("AEROSPIKE_SEED_HOSTS"), ",")
+	seedHosts := strings.Split(nodes, ",")
 
 	for _, host := range seedHosts {
 		tokens := strings.Split(host, ":")
@@ -37,7 +37,7 @@ func main() {
 	}
 
 	// Configure TLS
-	caFile := "/etc/pki/tls/certs/aerospike.ca-v2.crt"
+	caFile := "/folder/here/aerospike.ca-v4.crt"
 	serverPool := x509.NewCertPool()
 	caCert, err := ioutil.ReadFile(caFile)
 	serverPool.AppendCertsFromPEM(caCert)
@@ -53,9 +53,9 @@ func main() {
 	clientPolicy.TlsConfig = tlsConfig
 	clientPolicy.Timeout = 30 * time.Second
 
-	// Get username and password from environment
-	clientPolicy.User = os.Getenv("AEROSPIKE_APP_USER")
-	clientPolicy.Password = os.Getenv("AEROSPIKE_APP_PASSWORD")
+	// Configure username and password
+	clientPolicy.User = "aerospike_user"
+	clientPolicy.Password = "aerospike_pass"
 
 	// Connect to Aerospike cluster
 	client, err := as.NewClientWithPolicyAndHost(clientPolicy, hosts...)
