@@ -3,11 +3,11 @@
 const Aerospike = require('aerospike')
 const path = require('path')
 
-// Set CA file
+// Configure CA file
 // format: <config>, <cert_file>
 const caFile = path.join("/folder/here/", "aerospike.ca-v4.crt")
 
-// Set seed nodes
+// Configure seed nodes
 // format <IP>:<PORT>,<IP>:<PORT>,<IP>:<PORT>
 let host = "localhost:3000,localhost:3001,localhost:3002";
 host = host.split(",").map(host => {
@@ -18,11 +18,11 @@ host = host.split(",").map(host => {
     }
 });
 
-// Set username and password
+// Configure username and password
 const user = "aerospike_user";
 const pass = "aerospike_pass"
 
-// Starting connection
+// Create client
 const client = Aerospike.client({
     username: user,
     password: pass,
@@ -37,6 +37,7 @@ const client = Aerospike.client({
     connTimeoutMs: 1000
 });
 
+// Connect to Aerospike cluster
 client.connect(function (error) {
     if (error) throw error;
 });
