@@ -9,12 +9,14 @@ const caFile = path.join("/folder/here/", "aerospike.ca-v4.crt")
 
 // Configure seed nodes
 // format IP:PORT,IP:PORT,IP:PORT
-let host = "localhost:3000,localhost:3001,localhost:3002";
+let host = "localhost:3000/tls_name,localhost:3001/tls_name,localhost:3002/tls_name";
 host = host.split(",").map(host => {
     let item = host.split(":");
+    let sub_item = item[1].split("/");
     return {
         "addr": item[0],
-        "port": parseInt(item[1])
+        "port": parseInt(sub_item[0]),
+        "tlsname": sub_item[1]
     }
 });
 
@@ -24,7 +26,7 @@ const pass = "aerospike_pass"
 
 // Create client
 const client = Aerospike.client({
-    username: user,
+    user: user,
     password: pass,
     hosts: host,
     tls: {
