@@ -19,6 +19,10 @@ namespace Test
             policy.user = "aerospike_user";
             policy.password = "aerospike_pass";
             policy.failIfNotConnected = true;
+            policy.maxConnsPerNode = 100;
+            policy.minConnsPerNode = 1;
+            policy.maxErrorRate = 100;
+            policy.maxSocketIdle = 0;
 
             // Connect to Aerospike cluster
             AerospikeClient client = new AerospikeClient(policy, hosts);
