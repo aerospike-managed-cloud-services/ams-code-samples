@@ -27,5 +27,11 @@ policy.tlsPolicy = new TlsPolicy();
 policy.authMode = AuthMode.INTERNAL;
 policy.user = "aerospike_user";
 policy.password = "aerospike_pass";
+policy.maxConnsPerNode = 100;
+policy.minConnsPerNode = 1;
+policy.maxErrorRate = 100;
+policy.connectTimeout = 0;
+policy.maxSocketIdle = 0;
+policy.timeoutDelay = 0;
 
 AerospikeClient client = new AerospikeClient(policy, hosts);
