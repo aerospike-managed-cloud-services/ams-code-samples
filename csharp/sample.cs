@@ -10,9 +10,9 @@ namespace Test
         {
             // Configure seed nodes
             Host[] hosts = new Host[3];
-            hosts[0] = new Host("localhost0", 3000);
-            hosts[1] = new Host("localhost1", 3001);
-            hosts[2] = new Host("localhost2", 3002);
+            hosts[0] = new Host("localhost0/tls_name", 3000);
+            hosts[1] = new Host("localhost1/tls_name", 3001);
+            hosts[2] = new Host("localhost2/tls_name", 3002);
 
             // Create policy and configure username and password
             ClientPolicy policy = new ClientPolicy();
